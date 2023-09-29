@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,19 +24,19 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	// •cliente: Cliente (NN)
+	@ManyToOne(optional = false)	
+	private Cliente cliente;
 
 	@Column(nullable = false)
 	private Instant dataPedido;
 
 	@Column(nullable = false)
 	private Instant dataEntrega;
-	
+
 	private BigDecimal valorTotal;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, length = 10)
 	private SituacaoPedidoEnum situacao;
-	
-	
+
 }
